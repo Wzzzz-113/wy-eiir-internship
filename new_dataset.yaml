@@ -1,0 +1,5 @@
+train: /home/wy/YOLO/yolo_train/data-dm/train
+val: /home/wy/YOLO/yolo_train/data-dm/val
+
+nc: 1  # 类别数
+names: ['dm']
