@@ -3,19 +3,19 @@
 ## 2. 插网线链接网络（部署完一定要关代理）
 ## 3. ROS2 安装
 参考 fishros 一键安装
-'''
+```
 wget http://fishros.com/install -O fishros && . fishros
-'''
+```
 按照如下步骤依次选择安装
 [1]:一键安装(推荐):ROS
 [1]:更换系统源再继续安装
 [2]:更换系统源并清理第三方源  
 [1]:humble(ROS2)
 [1]:humble(ROS2)桌面版
-'''
+```
 sudo apt install ros-humble-backward-ros
 sudo apt install ros-humble-image-publisher
-'''
+```
 ## 4. 安装搜狗输入法(开发者可选)
 https://shurufa.sogou.com/linux?r=shouji 
 https://shurufa.sogou.com/linux/guide
