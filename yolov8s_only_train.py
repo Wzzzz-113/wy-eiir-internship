@@ -21,8 +21,16 @@ def convert_annotation(input_dir, img_id):
                     continue
                 if i['shape_type'] == 'rectangle':
                     ps = to_int(i['points'])
-                    w_, h_ = ps[1][0] - ps[0][0], ps[1][1] - ps[0][1]
-                    xc, yc = ps[0][0] + w_/2, ps[0][1] + h_/2
+                    x1, y1 = ps[0][0], ps[0][1]
+                    x2, y2 = ps[1][0], ps[1][1]
+                    x_min = min(x1, x2)  
+                    y_min = min(y1, y2) 
+                    x_max = max(x1, x2)
+                    y_max = max(y1, y2)
+                    w_ = x_max - x_min
+                    h_ = y_max - y_min
+                    xc = x_min + w_ / 2
+                    yc = y_min + h_ / 2
                     label_index = list(labels_dict.keys())[list(labels_dict.values()).index(i['label'])]
                     out_file.write(f'{label_index} {xc / W} {yc / H} {w_ / W} {h_ / H}\n')
     else:
@@ -68,9 +76,9 @@ def read_labels_txt(file_path):
 
     return labels
 
-train_data = '/home/eiir/eiir/pcb_data/pcb_yolo_train_data/train_data/train'
-val_data = '/home/eiir/eiir/pcb_data/pcb_yolo_train_data/train_data/val'
-labels_dict = read_labels_txt('/home/eiir/eiir/pcb_data/pcb_yolo_train_data/class_names_list.txt')
+train_data = '/home/wy/YOLO/yolo_train/data-pcb/train'
+val_data = '/home/wy/YOLO/yolo_train/data-pcb/val'
+labels_dict = read_labels_txt('/home/wy/YOLO/yolo_train/class_names_list.txt')
 suffix = 'jpg'
 
 train_data_txt =  train_data + '/train.txt'
@@ -80,7 +88,7 @@ generate_image_list_and_labels(val_data, val_data_txt)
 
 
 # 加载预训练模型权重
-model = YOLO('/home/eiir/eiir/yolo/yolov8s.pt')
+model = YOLO('/home/wy/YOLO/yolo_train/yolov8s.pt')
 
 with open('new_detect_hyps.yaml') as f:
     hyp_dict = yaml.safe_load(f)
