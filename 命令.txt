@@ -1,0 +1,6 @@
+图片文件重命名命令
+i=1; for x in *; do mv $x $i.jpg; let i=i+1; done
+图片压缩
+python3 batch_downscale.py /home/wy/Downloads/ --scale 0.5 ./output_images/
+清华源
+-i https://pypi.tuna.tsinghua.edu.cn/simple
